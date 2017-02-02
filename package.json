@@ -1,0 +1,20 @@
+{
+  "name": "es6-preso",
+  "version": "1.0.0",
+  "description": "A really dumb presentation about ES6. ES6 is cool, but this presentation is dumb. You ever watch Dumb and Dumber? This is Dumb. Look at another preso. Srsly. Last warning. Don't open this. Frealz dawg",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "dumb",
+    "es6",
+    "benjunya",
+    "mrbenj"
+  ],
+  "author": "Ben Junya",
+  "license": "WTFPL",
+  "dependencies": {
+    "reveal": "0.0.4"
+  }
+}
