@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Practical ES6</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Practical ES6</h1>
+					<p>An introduction to the future of Javascript</p>
+					<p>by Ben Junya</p>
+					<aside class="notes">
+						Get a feel for percentage of beginners, intermediates, and HARDCORE PRO DUDES
+					</aside>
+				</section>
+				<section>
+					<p>About Me</p>
+					<ul>
+						<li>Android Developer at 72andSunny</li>
+						<li>Enterprise web maintenence for Lexus.com (Team One Advertising)</li>
+						<li>Site architect for teamone-usa.com</li>
+						<li>Lead UI and Front end engineer and architect at Zeconomy Inc.</li>
+						<li>Self taught Software and web developer</li>
+						<li>Bachelor's of Music Education from Illinois Wesleyan University</li>
+					</ul>
+					<aside class="notes">
+						Oddball, self taught
+					</aside>
+				</section>
+				<section>
+					<h1>WARNING!</h1>
+					<img src="img/explicit.jpeg">
+					<aside class="notes">
+						Warn em you might swear because it's funny
+						when used in the correct darn tootin' context
+					</aside>
+				</section>
+				<section>
+					<h1>The state of Javascript</h1>
+					<div class="fragment">
+						<img class="sanic" src="img/sanic.png">
+						<p>GOTTA GO FAST</p>
+					</div>
+				</section>
+				<section>
+					<img src="img/angular.png">
+					<aside class="notes">
+						Angular 6 will already be out with 4 way data binding
+					</aside>
+				</section>
+				<section>
+					<p>It's an incredible and exciting time to be a Javascript developer</p>
+					<ul>
+						<li class="fragment">Front end unit testing</li>
+						<li class="fragment">Web components</li>
+						<li class="fragment">Service workers</li>
+						<li class="fragment">Websockets</li>
+						<li class="fragment">JSX and TypeScript</li>
+						<li class="fragment">Principles of Modularity</li>
+						<li class="fragment">Functional Programming</li>
+					</ul>
+					<aside class="notes">
+						All of this was totally unheard of until today. Go back in time 5-6 years and no one would have even thought of stuff like this. TRANSITION TO REALLY POOR DECISIONS
+					</aside>
+				</section>
+				<section>
+					<img class="dance-baby-dance" src="img/poor_decisions.jpg">
+					<aside class="notes">
+					I'm not super smart, I've made some poor decisions
+					</aside>
+				</section>
+				<section>
+					<p>From web developer to software engineer</p>
+					<ul>
+						<li>Creating folder structures</li>
+						<li>Implementing build systems like Gulp or Webpack</li>
+						<li>Turning web elements into web modules</li>
+					</ul>
+					<p class="fragment">IF YOU CAN THINK IT, YOU CAN BUILD IT</p>
+					<p class="fragment">Who do you have to wait for? <span class="fragment">No one</span></p>
+				</section>
+				<section>
+					<p>2 ULTIMATE RULES TO LEARNING&trade;</p>
+					<p class="fragment">Have fun</p>
+					<p class="fragment">Enjoy the process</p>
+				</section>
+				<section data-transition="fade-out">
+					<p>'let' is the new 'var'</p>
+					<pre><code data-trim data-noescape>
+						function printArrayContents(array) {
+
+
+							for(var i = 0; i < array.length; i++) {
+								console.log(array[i]);
+							}
+
+						}
+					</code></pre>
+				</section>
+				<section data-transition="fade-in">
+					<p>'let' is the new 'var'</p>
+					<pre><code data-trim data-noescape>
+						function printArrayContents(array) {
+							// variable *i* is still visible out here!
+
+							for(var i = 0; i < array.length; i++) {
+								console.log(array[i]);
+							}
+
+						}
+					</code></pre>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

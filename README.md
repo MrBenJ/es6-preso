@@ -1,4 +1,6 @@
-Ben Junya's (MrBenJ's) ES6 Presentation
-=======================================
+Practical ES6
+=============
+A presentation for JavascriptLA March 2017. Created by Ben Junya
 
-# Hey look it's a presentation. Make it do stuff. Kthxbye
+# What we talk about
+A fun an quick adventure into the ever evolving and (painfully) fast world of javascript.
