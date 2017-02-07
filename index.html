@@ -104,6 +104,37 @@
 					<p class="fragment">Have fun</p>
 					<p class="fragment">Enjoy the process</p>
 				</section>
+				<section>
+					<h1>WHAT IS ES6?</h1>
+					<ul>
+						<li>ECMAScript Release 6 - "Harmony"</li>
+						<li class="fragment">ECMAScript is the "proper" name for Javascript</li>
+						<li class="fragment">Not 100% Adopted yet</li>
+					</ul>
+					<div class="fragment">
+						<p>Biggest offender</p>
+						<img class="sanic" src="img/worst_logo_ever.png">
+					</div>
+					<aside class="notes">
+						HOT NEW LANGUAGE. DO THE AIRHORN!
+					</aside>
+				</section>
+				<section>
+					<h1>Why practical ES6?</h1>
+					<p class="fragment">Too much new stuff to discuss!</p>
+					<p class="fragment">Able to use now, instead of fighting the language later</p>
+					<aside class="notes">
+						What can you use now without hurting yourself too much? Presentation is geared towards
+						developers who have some experience with ES5
+					</aside>
+				</section>
+				<section>
+					<img src="img/painful_table.png">
+					<aside class="notes">
+						Anyone Googling ES6 will find this crazy table. It's difficult to fully understand
+						especially with stage-0 stage-1 stage-x stuff
+					</aside>
+				</section>
 				<section data-transition="fade-out">
 					<p>'let' is the new 'var'</p>
 					<pre><code data-trim data-noescape>
@@ -126,13 +157,971 @@
 							for(var i = 0; i < array.length; i++) {
 								console.log(array[i]);
 							}
-
+							// console.log(i) => array.length
 						}
 					</code></pre>
 				</section>
+				<section data-transition="fade-out fade-in">
+					<p>'let' is the new 'var'</p>
+					<pre><code data-trim data-noescape>
+						function awardPoints(isWinner) {
+							var points = 5;
+
+							if(isWinner) {
+								var points = 10; // Same variable!
+							}
+
+							return points; // => 10
+						}
+					</code></pre>
+				</section>
+				<section data-transition="fade-out fade-in">
+					<p>'let' is the new 'var'</p>
+					<pre><code data-trim data-noescape>
+						function awardPoints(isWinner) {
+							let points = 5;
+
+							if(isWinner) {
+								let points = 10; // different variable!
+							}
+
+							return points; // => 5 --- returns first "points"
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Why is this important?</p>
+					<ul>
+						<li class="fragment">Function scope can be messy</li>
+						<li class="fragment">Block scoping is stricter, but easier to visually identify</li>
+					</ul>
+					<p class="fragment underline">Stop using 'var' and start using 'let'</p>
+				</section>
+				<section>
+					<p>Strict is good!</p>
+					<pre><code data-trim data-noescape>
+						function older() {
+							var sity = 'football';
+							var sity = 'baseball'; // This is OK
+						}
+
+						function newer() {
+							let it = "go";
+							let it = "gooooo"; // SyntaxError
+						}
+					</code></pre>
+					<p class="fragment">Questions?</p>
+					<aside class="notes">
+						Many other languages already have block scoping. This allows code to be much more readable,
+						especially in longer and complex functions
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Arrow Functions</p>
+					<pre><code data-trim data-noescape>
+						function GabeTheDog() {
+							this.borks = 0;
+
+							setInterval(function bork() {
+								console.log('Bork!');
+								// won't work! "this"
+								// refers to global object
+								// not GabeTheDog
+								this.borks++;
+							}, 1000);
+						}
+						var Gabe = new GabeTheDog();
+						setTimeout(function() {
+							console.log('Gabe has borked '+ Gabe.borks + ' times');
+						}, 25000);
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Arrow Functions</p>
+					<pre><code data-trim data-noescape>
+						function GabeTheDog() {
+							var _this = this; // Fixing the problem
+							_this.borks = 0;
+
+							setInterval(function bork() {
+								console.log('Bork!');
+								_this.borks++;
+							}, 1000);
+						}
+						var Gabe = new GabeTheDog();
+						setTimeout(function() {
+							console.log('Gabe has borked '+ Gabe.borks + ' times');
+						}, 25000);
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Arrow Functions</p>
+					<pre><code data-trim data-noescape>
+						function GabeTheDog() {
+							this.borks = 0;
+
+							setInterval(() => {
+								console.log('Bork!');
+								this.borks++;
+							}, 1000);
+						}
+						let Gabe = new GabeTheDog();
+						setTimeout(() => {
+							console.log('Gabe has borked '+ Gabe.borks + ' times');
+						}, 25000);
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Arrow Functions</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						let button = document.getElementById('submitButton');
+						button.addEventListener('click', (e) => {
+							e.preventDefault();
+							postData('/server', {agree: true}).then(
+								(successfulResponse) => {
+									console.log(successfulResponse.msg);
+								}
+							);
+						});
+					</code></pre>
+					<p class="fragment">Questions?</p>
+					<aside class="notes">
+						It makes code much shorter and easier to read!
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Arrow Functions in Functional Programming</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						const isLarge = (item) => { return item.size > 20; }
+
+						let fries = new Fries(50);
+						let message = isLarge(fries) ?
+							'TOO MANY CARBS' : 'NOT ENOUGH CARBS';
+						console.log(message); // TOO MANY CARBS
+					</code></pre>
+					<aside class="notes">
+						Syntax can be shortened!
+					</aside>
+				</section>
+				<section data-transition="fade-in">
+					<p>Arrow Functions Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						// Single items don't need parentheses
+						const isLarge = (item) => { return item.size > 20; }
+						const isLarge = item => { return item.size > 20; }
+
+						// No curly braces required for implicit return
+						const isLarge = item => item.size > 20;
+					</code></pre>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Default Parameters in functions</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						function buildCycle(color, wheels) {
+							var frameColor = color || 'silver';
+							var totalWheels = wheels || 2;
+						}
+					</code></pre>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>Default Parameters in functions</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						function buildCycle(color = 'silver', wheels = 2) {
+							// Do stuff and get on with life!
+						}
+					</code></pre>
+					<aside class="notes">
+						This is something other languages have had forever!
+					</aside>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Spread Operator/Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						var missingWords = ['raining', 'cats', 'and'];
+						var theWeather = ['it', 'is', 'dogs'];
+
+
+						var sentence =
+							theWeather.slice(0, 2).concat(missingWords);
+						sentence = sentence.concat(theWeather.slice(2));
+						console.log(sentence.join(' '));
+						// it is raining cats and dogs
+					</code></pre>
+					<aside class="notes">
+						Arrays got a huge makeover! Start with spread! Also, this SUCKSSSS
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Spread Operator/Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						let missingWords = ['raining', 'cats', 'and'];
+						let theWeather = ['it', 'is', ...missingWords, 'dogs'];
+
+						console.log(theWeather.join(' '));
+						//it is raining cats and dogs
+					</code></pre>
+					<aside class="notes">
+						Works on any iterable
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Spread Operator/Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						var items = document.getElementsByClassName('item');
+						items.forEach(function(element) {
+							//Error: forEach is not a function
+						})
+						function addOneToEverything() {
+							arguments.forEach(function(item, index) {
+								//Error: forEach is not a function
+							});
+						}
+					</code></pre>
+					<aside class="notes">
+						items is actually an HTMLCollection... arguments is an 'array-like object'
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Spread Operator/Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						var items = document.getElementsByClassName('item');
+						console.log(items[3]); // some HTML element
+						function addOneToEverything() {
+							console.log(arguments[0]); // first arg
+							console.log(arguments[1]); // second arg
+						}
+					</code></pre>
+					<p class="fragment">WTF JAVASCRIPT?</p>
+					<aside class="notes">
+						WTF JAVASCRIPT? SRSLY U SUK
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Spread Operator/Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						let items = [...document.getElementsByClassName('item')];
+						items.forEach((element) => {
+							//yay it works!
+							if(!element.dataset.important) {
+								element.remove();
+							}
+						});
+						function addOneToEverything() {
+							let args = [...arguments];
+							args.forEach((item) => {
+								item++;
+							});
+							return args;
+						}
+					</code></pre>
+					<p class="fragment">Ahhh, so much nicer...</p>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>Array.from()</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						let items =
+							Array.from(document.getElementsByClassName('item'));
+						items.forEach((element) => {
+							//yay it works!
+							if(!element.dataset.important) {
+								element.remove();
+							}
+						});
+						function addOneToEverything() {
+							let args = Array.from(arguments);
+							args.forEach((item) => {
+								item++;
+							});
+							return args;
+						}
+					</code></pre>
+					<p>OH SNAP EVEN NICER!</p>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Importing Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						var fs = require('fs');
+						var GraphicsMagick = require('gm');
+						var Moment = require('moment');
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Importing Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						import fs from 'fs';
+						import gm as GraphicsMagick from 'gm';
+						import Moment from 'moment';
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Exporting Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						function addNumbers() {
+							var total = 0;
+							for(var i = 0; i < arguments.length; i++) {
+								total += arguments[i];
+							}
+							return total;
+						}
+						module.exports = {
+							addNumbers: addNumbers
+						};
+						//Meanwhile, in another file...
+						var addNumbers = require('./addNumbers').addNumbers;
+						addNumbers(12,15,20);
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Exporting Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						function addNumbers() {
+							let total = 0;
+							Array.from(arguments).forEach( (num) => {
+								total += num;
+							});
+							return total;
+						}
+						export default addNumbers;
+
+						//Meanwhile, in another file...
+						import addNumbers from './addNumbers';
+						console.log(addNumbers(12,15,20));
+					</code></pre>
+					<aside class="notes">
+						Next slide shows that name doesn't matter in 'export default'
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Exporting Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						function addNumbers() {
+							let total = 0;
+							Array.from(arguments).forEach( (num) => {
+								total += num;
+							});
+							return total;
+						}
+						export default addNumbers;
+
+						//Meanwhile, in another file...
+						import StupidMathFunction from './addNumbers';
+						console.log(StupidMathFunction(12,15,20));
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Exporting Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						export function addNumbers() {
+							let total = 0;
+							Array.from(arguments).forEach( (num) => {
+								total += num;
+							});
+							return total;
+						}
+						export function YellAtTimeWarnerCable(message) {
+							console.log('HEY TIME WARNER: '+message);
+						};
+
+						//Meanwhile, in another file...
+						import  { YellAtTimeWarnerCable } from './modules';
+						YellAtTimeWarnerCable('GIMMIE BETTER INTERNET!');
+					</code></pre>
+					<aside class="notes">
+						Mention tree shaking here!
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Exporting Modules</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						export function addNumbers() {
+							let total = 0;
+							Array.from(arguments).forEach( (num) => {
+								total += num;
+							});
+							return total;
+						}
+						export function YellAtTimeWarnerCable(message) {
+							console.log('HEY TIME WARNER: '+message);
+						};
+
+						//Meanwhile, in another file...
+						import * as Modules from './modules';
+						Modules.YellAtTimeWarnerCable('GIMMIE BETTER INTERNET!');
+						Modules.addNumbers(1,2,3);
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Real World Modularity Example</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						import React from 'react';
+						import ReactDOM from 'react-dom';
+						import InputMaskComponent from 'react-input-mask';
+
+						let container = document.getElementById('wrap');
+
+						ReactDOM.render(
+							&lt;InputMaskComponent
+								mask='(###)-###-####'
+								onChange={(evt) => { console.log(evt.target.value); }}
+								/&gt;,
+							container
+						);
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Real World Modularity Example</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						import React from 'react';
+						import ReactDOM from 'react-dom';
+						import InputMaskComponent from 'react-input-mask';
+
+						let container = document.getElementById('wrap');
+						let props = {
+							mask: '(###)-###-####',
+							onChange: (evt) => { console.log(evt.target.value); }
+						};
+						ReactDOM.render(
+							&lt;InputMaskComponent
+								...props
+								/&gt;,
+							container
+						);
+					</code></pre>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Callbacks and Promises</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					function doSomething(callback) {
+						// Do something here
+						callback();
+					}
+					</code></pre>
+					<aside class="notes">
+						Looks simple, right?
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Callbacks and Promises</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					var fs = require('fs');
+					var GraphicsMagick = require('gm');
+					fs.readdir(source, function(err, files) {
+						if(err) {
+							console.log('ERROR:' + err);
+						} else {
+							files.forEach(function(file, idx) {
+								GraphicsMagick(source + file).size(function(err, val) {
+									if(err) {
+										console.log('ERROR: ' + err);
+									} else {
+										var aspect = val.width / val.height;
+										console.log('aspect of '+file+' is '+aspect);
+									}
+								});
+							});
+						}
+					});
+					</code></pre>
+					<aside class="notes">
+						NodeJS is NOTORIOUS for having crazy callbacks like this. All we are trying to do
+						is friggin' get the aspect ratio of each file in a directory of images
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Callbacks and Promises</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					import fs from 'fs';
+					import gm as GraphicsMagick from 'gm';
+
+					function getRatios(source) {
+						new Promise( (resolve, reject) => {
+							fs.readdir(source, (err, files) => {
+								if(err) {
+									reject(err);
+								} else {
+									resolve(files);
+								}
+							})
+						}).then(
+							(files) => {
+								let aspects = [];
+								files.forEach( (file) => {
+									GraphicsMagick(source, file).size( (err, val) => {
+										if(err) {
+											throw err;
+										} else {
+											let aspect = val.width / val.height;
+											aspects.push(aspect);
+										}
+									})
+								});
+								return aspects;
+							}
+						).catch( (err) => { console.log('ERROR: ' + err) });
+					}
+					</code></pre>
+					<aside class="notes">
+					This doesn't look any better! Promises have actually been highly debated.
+					Does it actually do anything better? Maybe it does, maybe it doesn't.
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Practical Promise Use</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					export function getJSON(url) {
+						return new Promise( (resolve, reject) => {
+							let xhr = new XMLHttpRequest();
+							xhr.open('GET', url);
+							xhr.setRequestHeader('Accept',
+								'application/json, text/tavascript, */*; q=0.01');
+							xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+							xhr.onreadystatechange = () => {
+								if(xhr.readyState < 4) {
+									return;
+								}
+
+								if(xhr.status !== 200) {
+									reject(xhr.response);
+								}
+								if(xhr.readyState === 4) {
+									resolve(JSON.parse(xhr.response));
+								}
+							}
+							xhr.send();
+						});
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Practical Promise Use</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					import {getJSON} from 'scripts/modules/utils';
+
+					getJSON('/api/data').then(
+						(resp) => {
+							resp.forEach( (invoice) => {
+								//Do something with each invoice
+							});
+						}
+					).catch( (error) => { console.error(error); });
+
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Promise Basic Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					function doSomeStuff(condition) {
+						return new Promise( (resolve, reject) => {
+							if(condition) {
+								resolve('Yay! I worked!');
+							} else {
+								reject('DO YOU EVEN LIFT?');
+							}
+						});
+					}
+					doSomeStuff.then(
+						(success) => {
+							//Condition for success!
+							console.log(success); // Yay! I worked!
+						},
+						(failure) => {
+							//Condition for failure
+							console.log(failure); // DO YOU EVEN LIFT?
+						}
+					);
+					</code></pre>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Template Strings</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					var first_name = 'Billy';
+					var last_name = 'Mays'
+					var greeting = 'Hello ' + first_name + ' of the \n'
+						+ last_name + ' clan';
+					/*
+						Hello Billy of the
+						Mays clan
+
+					*/
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Template Strings</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					let first_name = 'Billy';
+					let last_name = 'Mays'
+					let greeting = `Hello ${first_name} of the
+						${last_name} clan`;
+					/*
+						Hello Billy of the
+						Mays clan
+
+					*/
+					</code></pre>
+					<aside class="notes">
+					Template strings preserve newlines and spaces
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Template Strings</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					import {toCurrency} from 'scripts/modules/utils';
+					let money = 345.65;
+					let status = `You have ${toCurrency(money)} in your account`;
+					/*
+						You have $345.65 in your account
+					*/
+					</code></pre>
+					<aside class="notes">
+					Template strings preserve newlines and spaces
+					</aside>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Generators</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					function* itemIterator(array) {
+						array.forEach((item) => {
+							yield item;
+						});
+					}
+
+					let cars = [...data]; //Assume data is a bunch of objects
+					let itemGenerator = itemIterator(cars);
+
+					console.log(itemGenerator.next().value)) // first object
+					console.log(itemGenerator.next().value)) // second object
+					console.log(itemGenerator.next().value)) // third object
+					// ...
+
+					</code></pre>
+					<aside class="notes">
+					Denoted with function* - returns a Generator object
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Generators</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					function* itemIterator(array) {
+						array.forEach((item) => {
+							yield item;
+						});
+					}
+
+					let cars = [...data]; //Assume data is a bunch of objects
+					let itemGenerator = itemIterator(cars);
+
+					itemGenerator.next();
+					// => {value: [Object object], done: false}
+
+					</code></pre>
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Generators</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					import { showModal, toCurrency, postData } from 'scripts/modules/utils';
+
+					function* itemIterator(array) {
+					  array.forEach((item) => {
+						yield item;
+					  });
+					}
+
+					let cars = [...data]; //Assume data is a bunch of objects
+					let itemGenerator = itemIterator(cars);
+
+					let iter = itemGenerator.next();
+					let goodCars = [];
+					let badCars = [];
+					// While the generator is still not done...
+					while(!iter.done) {
+					  let car = iter.value; // Get car from generated object
+
+					  let body = `Car was made in ${car.year} and has generated
+						  ${toCurrency(car.revenue)}. Should this vehicle
+						  be retired?`;
+					  showModal({
+						title: 'Is this car OK?',
+						body: body
+					  }).then(
+						(decision) => {
+						  if(decision === 'yes') {
+							goodCars.push(car.id);
+						  } else {
+							badCars.push(car.id);
+						  }
+						}
+					  );
+					  iter = itemGenerator.next();
+					}
+					postData('/api/cars/approval', { approve: goodCars, reject: badCars});
+
+					</code></pre>
+					<aside class="notes">
+					Step through line by line. NOTE: Generators are a difficult and
+					advanced concept. It will take more than a short presentation to fully
+					understand what's happening and how this all works.
+					</aside>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Class Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					var Animal = function(name, legs, color) {
+						this.name = name;
+						this.legs = legs;
+						this.color = color;
+					}
+					Animal.prototype.sayName = function() {
+						console.log(name.toUpperCase() + '!');
+					}
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Class Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					class Animal {
+						constructor(name, legs, color) {
+							this.name = name;
+							this.legs = legs;
+							this.color = color;
+						}
+
+						sayName() {
+							console.log(name.toUpperCase() + '!');
+						}
+					}
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Class Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					class Dog extends Animal {
+						constructor(name, color) {
+							super(name, 4, color);
+						}
+						Bark() {
+							console.log('Bark!');
+						}
+					}
+
+					let Frank = new Dog('Frank', 'Brown');
+					Frank.Bark(); // => Bark!
+					Frank.sayName(); // => FRANK!
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>ReactJS Uses Class Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					import React from 'react';
+
+					class NameTag extends React.Component {
+						constructor(props) {
+							super(props);
+						}
+
+						render() {
+							return &lt;p&gt;{this.props.name}&lt;/p&gt;;
+						}
+
+					}
+					export default NameTag;
+
+					// In another file...
+					import React from 'react';
+					import ReactDOM from 'react-dom';
+					import NameTag from './nameTag';
+
+					ReactDOM.render(
+						&lt;NameTag
+							name="Bobby Tables"
+						/&gt;
+					);
+					</code></pre>
+				</section>
+				<section>
+					<p>About that Class Syntax...</p>
+					<ul>
+						<li class="fragment">It's syntactic sugar for prototype!</li>
+						<li class="fragment">Current Trend: Functional Programming - not Object Oriented!</li>
+					</ul>
+					<p class="fragment underline">"Syntactic sugar causes cancer of the semicolon."</p>
+					<p class="fragment"> - A dead guy that wrote book on computer science in 1975</p>
+					<aside class="notes">
+					The guy's real name is Alan J. Perlis, and yes, he actually did write a book on CS in 1975 titled "Introduction to computer science"
+					</aside>
+				</section>
+				<section>
+					<p>Holy Amazeballs Ben! How do I use all these great new features!?</p>
+					<p class="fragment">Unfortunately, this is one of the most difficult parts</p>
+					<p class="fragment">This is the most important part of the entire presentation... Please pay attention!</p>
+					<aside class="notes">
+						Press 'x' before going to the next slide to own the entire audience
+					</aside>
+				</section>
+				<section>
+					<iframe id="video" class="stretch" width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ?" frameborder="0" allowfullscreen></iframe>
+				</section>
+				<section>
+					<img class="sanic" src="img/babel.png">
+					<p class="fragment">Transpiles your ES6 code into ES5</p>
+					<p class="fragment">Huge community support</p>
+					<p class="fragment">Excellent documentation</p>
+					<p class="fragment">Works with virtually any setup</p>
+				</section>
+				<section>
+					<p>Setting up Babel</p>
+					<p>It's best to start with the command line</p>
+					<pre class="fragment"><code class="bash" data-noescape data-trim>
+					# Creates a basic package.json file in your current directory
+					$ npm init -y
+
+					# installs the babel-cli tools
+					$ npm install babel-cli --save-dev
+					</code></pre>
+				</section>
+				<section>
+					<p>Edit your package.json file with an npm script</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					{
+						"name": "my-project",
+						"version": "1.0.0",
+						"scripts": {
+							"build": "babel src -d lib"
+						},
+						"devDependencies": {
+							"babel-cli": "^6.0.0"
+						}
+					}
+					</code></pre>
+					<p class="fragment">Take all the .js files in 'src' folder, transpile them, and put them into 'lib' folder</p>
+					<pre class="fragment"><code class="bash" data-noescape data-trim>
+					$ npm run build
+					</code></pre>
+				</section>
+				<section>
+					<p>Install a babel preset</p>
+					<pre><code class="bash" data-noescape data-trim>
+					# Creates a basic package.json file in your current directory
+					$ npm install babel-preset-env --save-dev
+					</code></pre>
+					<div class="fragment">
+						<p>Tell Babel to use the env preset in a .babelrc file</p>
+						<pre><code class="bash" data-noescape data-trim>
+						#creates an empty .babelrc file
+						$ touch .babelrc
+						</code></pre>
+					</div>
+					<div class="fragment">
+						<p>Edit your .babelrc file should look exactly like this</p>
+						<pre><code class="jsx" data-noescape data-trim>
+						{
+							"preset": ["env"]
+						}
+						</code></pre>
+					</div>
+				</section>
+				<section data-transition="fade-out">
+					<p>Write some code!</p>
+					<p>ES6 code</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					class Person {
+						constructor(name, age) {
+							this.name = name;
+							this.age = age;
+						}
+
+						greet() {
+							console.log('Hello!');
+						}
+					}
+					document.addEventListener('DOMContentLoaded', () => {
+						const isOld = person => person.age > 90;
+						let Dude = new Person('Allen', 95);
+						let message = '';
+						if(isOld(Dude)) {
+							message = `${Dude.name} is old!`;
+						} else {
+							message = `${Dude.name} is young and hip`;
+						}
+
+						console.log(message);
+					});
+					</code></pre>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>Watch it transpile!</p>
+						<p>ES5 code</p>
+						<pre><code class="jsx" data-noescape data-trim>
+						'use strict';
+						var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+						function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+						var Person = function () {
+							function Person(name, age) {
+								_classCallCheck(this, Person);
+
+								this.name = name;
+								this.age = age;
+							}
+
+							_createClass(Person, [{
+								key: 'greet',
+								value: function greet() {
+									console.log('Hello!');
+								}
+							}]);
+
+							return Person;
+						}();
+
+						document.addEventListener('DOMContentLoaded', function () {
+							var isOld = function isOld(person) {
+								return person.age > 90;
+							};
+							var Dude = new Person('Allen', 95);
+							var message = '';
+							if (isOld(Dude)) {
+								message = Dude.name + ' is old!';
+							} else {
+								message = Dude.name + ' is young and hip';
+							}
+
+							console.log(message);
+						});
+					</code></pre>
+				</section>
+				<section>
+					<p>What'd I miss?</p>
+					<ul>
+						<li class="fragment">async/await</li>
+						<li class="fragment">More Array methods</li>
+						<li class="fragment">Object.assign</li>
+						<li class="fragment">Map, Set, WeakMap, WeakSet</li>
+						<li class="fragment">Symbol</li>
+						<li class="fragment">Binary &amp; Octal Literals</li>
+					</ul>
+					<p class="fragment">There's so much more!</p>
+				</section>
+				<section>
+					<img class="rock-the-boat" src="img/poor_decisions2.jpg">
+					<aside class="notes">
+						Maybe it was a bad decision for me to leave out these things, but there's
+						a thousand new features, and only a few hours of time to get through it all
+					</aside>
+				</section>
+				<section>
+					<p>Thank you JavascriptLA!</p>
+					<img class="smaller" src="img/ben_hike.jpg">
+					<p>Github: <a href="http://www.github.com/mrbenj">@MrBenJ</a><br>
+						Email: <a href="mailto:bjunya@gmail.com">bjunya@gmail.com</a><br>
+						I offer private and group programming classes. Contact for more info
+					</p>
+				</section>
 			</div>
 		</div>
-
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 
@@ -148,6 +1137,12 @@
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
+			});
+			document.addEventListener('keyup', function(evt) {
+				console.log(evt.keyCode);
+				if(evt.keyCode === 88) {
+					document.getElementById('video').src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?start=43&autoplay=true';
+				}
 			});
 		</script>
 	</body>
