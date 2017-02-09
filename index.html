@@ -29,6 +29,7 @@
 					<h1>Practical ES6</h1>
 					<p>An introduction to the future of Javascript</p>
 					<p>by Ben Junya</p>
+					<p><a href="http://mrbenj.github.io/es6-preso">http://mrbenj.github.io/es6-preso</a></p>
 					<aside class="notes">
 						Get a feel for percentage of beginners, intermediates, and HARDCORE PRO DUDES
 					</aside>
@@ -68,7 +69,7 @@
 						Angular 6 will already be out with 4 way data binding
 					</aside>
 				</section>
-				<section>
+				<section data-transition="fade-out">
 					<p>It's an incredible and exciting time to be a Javascript developer</p>
 					<ul>
 						<li class="fragment">Front end unit testing</li>
@@ -80,52 +81,110 @@
 						<li class="fragment">Functional Programming</li>
 					</ul>
 					<aside class="notes">
-						All of this was totally unheard of until today. Go back in time 5-6 years and no one would have even thought of stuff like this. TRANSITION TO REALLY POOR DECISIONS
+						All of this was totally unheard of until today. Go back in time 5-6 years and no one would have even thought of stuff like this.
+						At the absolute core of all of this really awesome ecosystem and exciting time is Javascript
 					</aside>
 				</section>
-				<section>
-					<img class="dance-baby-dance" src="img/poor_decisions.jpg">
-					<aside class="notes">
-					I'm not super smart, I've made some poor decisions
-					</aside>
-				</section>
-				<section>
-					<p>From web developer to software engineer</p>
+				<section data-transition="slide-in fade-out">
+					<h1>WHAT IS ES6?</h1>
+					<p>The <span class="underline">new</span> version of Javascript</p>
 					<ul>
-						<li>Creating folder structures</li>
-						<li>Implementing build systems like Gulp or Webpack</li>
-						<li>Turning web elements into web modules</li>
+						<li>ECMAScript Release 6 - "Harmony"<br>
+							aka ES2015
+						</li>
+						<li>ECMAScript is the "proper" name for Javascript</li>
 					</ul>
+					<aside class="notes">
+						WRONG SLIDE. Cut and go to "hot new" with intant rap airhorn
+					</aside>
+				</section>
+				<section data-transition="none">
+					<h1>WHAT IS ES6?</h1>
+					<p>The HOT <span class="underline">new</span> version of Javascript</p>
+					<ul>
+						<li>ECMAScript Release 6 - "Harmony"<br>
+							aka ES2015
+						</li>
+						<li>ECMAScript is the "proper" name for Javascript</li>
+					</ul>
+					<aside class="notes">
+						http://www.instantrapairhorn.com on "hot new"
+					</aside>
+				</section>
+				<section>
+					<p>Web Developer&nbsp;&nbsp;=>&nbsp;&nbsp;Web Engineer</p>
+					<ul>
+						<li class="fragment">Creating folder structures</li>
+						<li class="fragment">Implementing build systems like Gulp or Webpack</li>
+						<li class="fragment">Turning web elements into web modules</li>
+						<li class="fragment">Web applications are getting more complex</li>
+						<li class="fragment">Stronger separation from designers to engineers</li>
+					</ul>
+					<p class="fragment">Know HTML, CSS, and Javascript?</p>
 					<p class="fragment">IF YOU CAN THINK IT, YOU CAN BUILD IT</p>
-					<p class="fragment">Who do you have to wait for? <span class="fragment">No one</span></p>
+					<p class="fragment">What do you have to wait for? <span class="fragment underline">Nothing</span></p>
+					<aside class="notes">
+						Interesting trend where designers are expected to know HTML and CSS and Sass/Less. Some
+						front end guys are pretty much becoming strictly only Javascript engineers
+					</aside>
 				</section>
 				<section>
 					<p>2 ULTIMATE RULES TO LEARNING&trade;</p>
 					<p class="fragment">Have fun</p>
 					<p class="fragment">Enjoy the process</p>
-				</section>
-				<section>
-					<h1>WHAT IS ES6?</h1>
-					<ul>
-						<li>ECMAScript Release 6 - "Harmony"</li>
-						<li class="fragment">ECMAScript is the "proper" name for Javascript</li>
-						<li class="fragment">Not 100% Adopted yet</li>
-					</ul>
-					<div class="fragment">
-						<p>Biggest offender</p>
-						<img class="sanic" src="img/worst_logo_ever.png">
-					</div>
 					<aside class="notes">
-						HOT NEW LANGUAGE. DO THE AIRHORN!
+						You are human. You are bound to make mistakes and poor decisions.
 					</aside>
 				</section>
-				<section>
+				<section data-transition="none">
+					<img class="dance-baby-dance" src="img/poor_decisions.jpg">
+					<aside class="notes">
+					I'm not super smart, I've made some poor decisions
+					</aside>
+				</section>
+
+				<section data-transition="none">
 					<h1>Why practical ES6?</h1>
-					<p class="fragment">Too much new stuff to discuss!</p>
-					<p class="fragment">Able to use now, instead of fighting the language later</p>
+					<p class="fragment">12 hour discussion for EVERYTHING</p>
+					<p class="fragment">Focusing on things we can use now, instead of fighting the language later</p>
 					<aside class="notes">
 						What can you use now without hurting yourself too much? Presentation is geared towards
 						developers who have some experience with ES5
+					</aside>
+				</section>
+				<section data-transition="none">
+					<pre><code class="jsx" data-trim data-noescape>
+					import getJSON from 'scripts/modules/utils';
+
+					function* dataGen(items) {
+						items.forEach( (item) => {
+							if(item.sub) {
+								yield* getJSON(url + '?sub='+item.sub);
+							} else {
+								yield item;
+							}
+						});
+					}
+					async function getParsed(url, parseFunc) {
+						let data = await getJSON(url);
+						let subGenerator = dataGen(data);
+						let parsed = [];
+						while(!subGenerator.done) {
+							parsed.push(parseFunc(subGenerator.next().value));
+						}
+
+						return parsed;
+					}
+					let fullyParsedData = getParsed('/inventory', (item) => {
+						if(item.apr) {
+							 item.apr = (item.apr * 100) + '%';
+						}
+					});
+
+					</code></pre>
+					<aside class="notes">
+					It gets to the point where your asyncronous javascript starts to look synchronous
+					it almost looks like an alien foreign language after some time.
 					</aside>
 				</section>
 				<section>
@@ -140,7 +199,6 @@
 					<pre><code data-trim data-noescape>
 						function printArrayContents(array) {
 
-
 							for(var i = 0; i < array.length; i++) {
 								console.log(array[i]);
 							}
@@ -148,12 +206,11 @@
 						}
 					</code></pre>
 				</section>
-				<section data-transition="fade-in">
+				<section data-transition="fade-in fade-out">
 					<p>'let' is the new 'var'</p>
-					<pre><code data-trim data-noescape>
+					<pre><code class="jsx" data-trim data-noescape>
 						function printArrayContents(array) {
 							// variable *i* is still visible out here!
-
 							for(var i = 0; i < array.length; i++) {
 								console.log(array[i]);
 							}
@@ -161,17 +218,15 @@
 						}
 					</code></pre>
 				</section>
-				<section data-transition="fade-out fade-in">
+				<section data-transition="fade-in fade-out">
 					<p>'let' is the new 'var'</p>
 					<pre><code data-trim data-noescape>
-						function awardPoints(isWinner) {
-							var points = 5;
-
-							if(isWinner) {
-								var points = 10; // Same variable!
+						function printArrayContents(array) {
+							// i => undefined
+							for(let i = 0; i < array.length; i++) {
+								console.log(array[i]);
 							}
-
-							return points; // => 10
+							// console.log(i) => undefined
 						}
 					</code></pre>
 				</section>
@@ -179,13 +234,27 @@
 					<p>'let' is the new 'var'</p>
 					<pre><code data-trim data-noescape>
 						function awardPoints(isWinner) {
-							let points = 5;
+							var points = 10;
 
-							if(isWinner) {
-								let points = 10; // different variable!
+							if(!isWinner) {
+								var points = 5; // Same variable!
 							}
 
-							return points; // => 5 --- returns first "points"
+							return points; // => 5
+						}
+					</code></pre>
+				</section>
+				<section data-transition="fade-out fade-in">
+					<p>'let' is the new 'var'</p>
+					<pre><code data-trim data-noescape>
+						function awardPoints(isWinner) {
+							let points = 10;
+
+							if(!isWinner) {
+								let points = 5; // different variable!
+							}
+
+							return points; // => 10
 						}
 					</code></pre>
 				</section>
@@ -206,14 +275,54 @@
 						}
 
 						function newer() {
-							let it = "go";
-							let it = "gooooo"; // SyntaxError
+							let it = "gooooooo";
+							let it = "NO! DON'T SING THE SONG!"; // SyntaxError
 						}
 					</code></pre>
-					<p class="fragment">Questions?</p>
 					<aside class="notes">
 						Many other languages already have block scoping. This allows code to be much more readable,
 						especially in longer and complex functions
+					</aside>
+				</section>
+				<section data-transition="fade-in fade-out">
+					<p>'let' is a Corgi</p>
+					<img class="dance-baby-dance" src="img/corgis.jpg">
+					<aside class="notes">
+						Just by looking at it, you have a pretty good idea of where it can or can't go
+					</aside>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>'var' is a German Shephard</p>
+					<img class="dance-baby-dance" src="img/german_shep.jpg">
+					<aside class="notes">
+						You don't know exactly where it can or can't go. It also might bite you
+						in the ass if you don't keep an eye on it
+					</aside>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>'const'</p>
+					<pre><code data-trim data-noescape>
+						const number = 8;
+						number = 15; // TypeError: Assignment to constant
+					</code></pre>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>'const' is block scoped like 'let'</p>
+					<pre><code data-trim data-noescape>
+						const API_KEY = '99aedd983ff987e09ss8aa0770e8dcc9987b9fa813';
+						if(API_KEY) {
+							const NODES = 8;
+							// var hoists API_KEY to the global
+							// scope and causes redeclaration error
+							var API_KEY = '123987adddeff'
+						}
+						console.log(NODES); // undefined
+					</code></pre>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<img class="dance-baby-dance" src="img/sad_shep.jpg">
+					<aside class="notes">
+					NO! BAD DOG VAR! STOP IT!
 					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
@@ -235,6 +344,9 @@
 							console.log('Gabe has borked '+ Gabe.borks + ' times');
 						}, 25000);
 					</code></pre>
+					<aside class="notes">
+					Common Javascript problem. It sucks. touch on Function.prototype.bind()
+					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
 					<p>Arrow Functions</p>
@@ -253,6 +365,20 @@
 							console.log('Gabe has borked '+ Gabe.borks + ' times');
 						}, 25000);
 					</code></pre>
+					<aside class="notes">
+						Add _this to make it work in ES5
+					</aside>
+				</section>
+				<section data-transition="slide-in slide-out">
+					<p>Arrow Functions</p>
+					<pre><code data-trim data-noescape>
+						var $this = this;
+						var _this = this;
+						var that = this;
+					</code></pre>
+					<aside class="notes">
+					Normal solution - add a var _this or _that or $this - 'this' is a pain in the ass!
+					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
 					<p>Arrow Functions</p>
@@ -271,22 +397,86 @@
 						}, 25000);
 					</code></pre>
 				</section>
-				<section data-transition="fade-in fade-out">
-					<p>Arrow Functions</p>
+				<section data-transition="slide-in fade-out">
+					<p>Arrow Functions makes code shorter and cleaner</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						var button = document.getElementById('submitButton');
+						button.addEventListener('click', function(e) {
+							e.preventDefault();
+							postData('/server', {agree: true}).then(
+								function(response) {
+									console.log(response.msg);
+								}
+							);
+						});
+					</code></pre>
+					<aside class="notes">
+						Clean!
+					</aside>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>Arrow Functions makes code shorter and cleaner</p>
 					<pre><code class="jsx" data-trim data-noescape>
 						let button = document.getElementById('submitButton');
 						button.addEventListener('click', (e) => {
 							e.preventDefault();
 							postData('/server', {agree: true}).then(
-								(successfulResponse) => {
-									console.log(successfulResponse.msg);
+								(response) => {
+									console.log(response.msg);
 								}
 							);
 						});
 					</code></pre>
-					<p class="fragment">Questions?</p>
 					<aside class="notes">
-						It makes code much shorter and easier to read!
+						Use them as often as possible!
+					</aside>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Even if you are an absolute monster and code like this:</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						var button = document.getElementById('submitButton');
+						button.addEventListener
+						(
+							'click',
+							function(e)
+							{
+								e.preventDefault();
+								postData('/server', {agree: true}).then
+								(
+									function(response)
+									{
+										console.log(response.msg);
+									}
+								);
+							}
+						);
+					</code></pre>
+					<aside class="notes">
+						Clean!
+					</aside>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>Even if you are an absolute monster and code like this:</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						let button = document.getElementById('submitButton');
+						button.addEventListener
+						(
+							'click',
+							(e) =>
+							{
+								e.preventDefault();
+								postData('/server', {agree: true}).then
+								(
+									(response) =>
+									{
+										console.log(response.msg);
+									}
+								);
+							}
+						);
+					</code></pre>
+					<aside class="notes">
+						Use them as often as possible!
 					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
@@ -320,14 +510,16 @@
 						function buildCycle(color, wheels) {
 							var frameColor = color || 'silver';
 							var totalWheels = wheels || 2;
+
+							return new Vehicle(frameColor, totalWheels);
 						}
 					</code></pre>
 				</section>
 				<section data-transition="fade-in slide-out">
 					<p>Default Parameters in functions</p>
 					<pre><code class="jsx" data-trim data-noescape>
-						function buildCycle(color = 'silver', wheels = 2) {
-							// Do stuff and get on with life!
+						function buildCycle(frameColor = 'silver', totalWheels = 2) {
+							return new Vehicle(frameColor, totalWheels);
 						}
 					</code></pre>
 					<aside class="notes">
@@ -338,34 +530,36 @@
 					<p>Spread Operator/Syntax</p>
 					<pre><code class="jsx" data-trim data-noescape>
 						var missingWords = ['raining', 'cats', 'and'];
-						var theWeather = ['it', 'is', 'dogs'];
+						var theWeather = ['It', 'is', 'dogs'];
 
-
+						// "It is raining cats and dogs"
 						var sentence =
 							theWeather.slice(0, 2).concat(missingWords);
 						sentence = sentence.concat(theWeather.slice(2));
 						console.log(sentence.join(' '));
-						// it is raining cats and dogs
+
 					</code></pre>
 					<aside class="notes">
 						Arrays got a huge makeover! Start with spread! Also, this SUCKSSSS
 					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
-					<p>Spread Operator/Syntax</p>
+					<p>Spread Operator</p>
 					<pre><code class="jsx" data-trim data-noescape>
 						let missingWords = ['raining', 'cats', 'and'];
-						let theWeather = ['it', 'is', ...missingWords, 'dogs'];
+						let theWeather = ['It', 'is', ...missingWords, 'dogs'];
+
+						// "It is raining cats and dogs"
 
 						console.log(theWeather.join(' '));
-						//it is raining cats and dogs
+
 					</code></pre>
 					<aside class="notes">
 						Works on any iterable
 					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
-					<p>Spread Operator/Syntax</p>
+					<p>Spread Operator</p>
 					<pre><code class="jsx" data-trim data-noescape>
 						var items = document.getElementsByClassName('item');
 						items.forEach(function(element) {
@@ -436,6 +630,30 @@
 						}
 					</code></pre>
 					<p>OH SNAP EVEN NICER!</p>
+				</section>
+				<section data-transition="slide-in fade-out">
+					<p>Array.includes()</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					var hip_hip_array = ['hip', 'hip'];
+					var hop = 'hop';
+					if(hip_hip_array.indexOf(hop) === -1) {
+						console.log('Not a hip hop array');
+					} else {
+						console.log('This is a hip hop array!');
+					}
+					</code></pre>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p>Array.includes()</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					let hip_hip_array = ['hip', 'hip'];
+					let hop = 'hop';
+					if(hip_hip_array.includes(hop)) {
+						console.log('Not a hip hop array');
+					} else {
+						console.log('This is a hip hop array!');
+					}
+					</code></pre>
 				</section>
 				<section data-transition="slide-in fade-out">
 					<p>Importing Modules</p>
@@ -957,7 +1175,7 @@
 					<p class="fragment">Unfortunately, this is one of the most difficult parts</p>
 					<p class="fragment">This is the most important part of the entire presentation... Please pay attention!</p>
 					<aside class="notes">
-						Press 'x' before going to the next slide to own the entire audience
+						Press 'x' before going to the next slide to pwn the entire audience
 					</aside>
 				</section>
 				<section>
@@ -1014,7 +1232,7 @@
 						</code></pre>
 					</div>
 					<div class="fragment">
-						<p>Edit your .babelrc file should look exactly like this</p>
+						<p>Edit your .babelrc file to look like this</p>
 						<pre><code class="jsx" data-noescape data-trim>
 						{
 							"preset": ["env"]
@@ -1098,10 +1316,7 @@
 					<ul>
 						<li class="fragment">async/await</li>
 						<li class="fragment">More Array methods</li>
-						<li class="fragment">Object.assign</li>
 						<li class="fragment">Map, Set, WeakMap, WeakSet</li>
-						<li class="fragment">Symbol</li>
-						<li class="fragment">Binary &amp; Octal Literals</li>
 					</ul>
 					<p class="fragment">There's so much more!</p>
 				</section>
@@ -1117,7 +1332,7 @@
 					<img class="smaller" src="img/ben_hike.jpg">
 					<p>Github: <a href="http://www.github.com/mrbenj">@MrBenJ</a><br>
 						Email: <a href="mailto:bjunya@gmail.com">bjunya@gmail.com</a><br>
-						I offer private and group programming classes. Contact for more info
+						Private and group programming classes available. Contact for more info
 					</p>
 				</section>
 			</div>
