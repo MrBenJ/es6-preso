@@ -29,8 +29,14 @@ No new javascript frameworks were created during this presentation.
 * Setting up Babel on the CLI
 * Plus, practical real world examples of everything!
 
-Come and learn the awesomeness that is ES6, laugh at my stupid presentation and
-have some good ol' fun learning it.
+Come and learn the awesomeness that is ES6, the newest version of the programming language that Brendan Eich says
+sounds like an unwanted skin disease [source](https://mail.mozilla.org/pipermail/es-discuss/2006-October/000133.html).
 
 You can view the slideshow at [this link here](https://mrbenj.github.io/es6-preso) - Press 's' on your keyboard
 at any time to view speaker notes.
+
+### License
+This presentation is released under the wonderful WTFPL licencse, the "Do What the Fuck You Want to" Public License.
+
+You can do whatever the fuck you want to do with this presentation.
+Details of the WTFPL [here](http://www.wtfpl.net/about/)
