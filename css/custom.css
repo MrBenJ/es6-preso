@@ -15,3 +15,7 @@
 .underline {
     text-decoration: underline;
 }
+
+.reveal pre code {
+    max-height: 530px;
+}

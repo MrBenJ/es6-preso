@@ -63,6 +63,10 @@
 						<p>GOTTA GO FAST</p>
 					</div>
 				</section>
+				<aside class="notes">
+					Javascript is opinionated. There's a million ways to do the same thing.
+					I am still learning
+				</aside>
 				<section>
 					<img src="img/angular.png">
 					<aside class="notes">
@@ -147,9 +151,22 @@
 					<h1>Why practical ES6?</h1>
 					<p class="fragment">12 hour discussion for EVERYTHING</p>
 					<p class="fragment">Focusing on things we can use now, instead of fighting the language later</p>
+					<p class="fragment">Everything shown is "Stage 4" or finished.</p>
 					<aside class="notes">
 						What can you use now without hurting yourself too much? Presentation is geared towards
-						developers who have some experience with ES5
+						developers who have some experience with ES5.
+					</aside>
+				</section>
+				<section>
+					<h1>TC39 Process</h1>
+					<li class="fragment">Stage 0: "Strawman"</li>
+					<li class="fragment">Stage 1: "Proposal"</li>
+					<li class="fragment">Stage 2: "Draft"</li>
+					<li class="fragment">Stage 3: "Candidate"</li>
+					<li class="fragment">Stage 4: "Finished"</li>
+					<aside class="notes">
+						TC39 meets every 2 months. They review proposals. They're mostly big players
+						in the tech industry
 					</aside>
 				</section>
 				<section data-transition="none">
@@ -183,6 +200,8 @@
 
 					</code></pre>
 					<aside class="notes">
+					NOTE: All code examples are scrollable iframes.
+
 					It gets to the point where your asyncronous javascript starts to look synchronous
 					it almost looks like an alien foreign language after some time.
 					</aside>
@@ -325,6 +344,23 @@
 					NO! BAD DOG VAR! STOP IT!
 					</aside>
 				</section>
+				<section data-transition="">
+					<p>'const'</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					// Yes!
+					const flavors = [];
+					flavors.push('Cherry');
+					console.log(flavors) // => ['Cherry']
+
+					// No!
+					flavors = ['Cherry', 'Watermelon']; // Error :(
+					</code></pre>
+					<aside class="notes">
+						'const' does not mean 'immutable.' It merely restricts redeclaration. Note
+						that you should use 'const' if what you're declaring will not change.
+						Mention Immutable.js
+					</aside>
+				</section>
 				<section data-transition="fade-in fade-out">
 					<p>Arrow Functions</p>
 					<pre><code data-trim data-noescape>
@@ -417,7 +453,7 @@
 				<section data-transition="fade-in slide-out">
 					<p>Arrow Functions makes code shorter and cleaner</p>
 					<pre><code class="jsx" data-trim data-noescape>
-						let button = document.getElementById('submitButton');
+						const button = document.getElementById('submitButton');
 						button.addEventListener('click', (e) => {
 							e.preventDefault();
 							postData('/server', {agree: true}).then(
@@ -458,7 +494,7 @@
 				<section data-transition="fade-in slide-out">
 					<p>Even if you are an absolute monster and code like this:</p>
 					<pre><code class="jsx" data-trim data-noescape>
-						let button = document.getElementById('submitButton');
+						const button = document.getElementById('submitButton');
 						button.addEventListener
 						(
 							'click',
@@ -485,7 +521,7 @@
 						const isLarge = (item) => { return item.size > 20; }
 
 						let fries = new Fries(50);
-						let message = isLarge(fries) ?
+						const message = isLarge(fries) ?
 							'TOO MANY CARBS' : 'NOT ENOUGH CARBS';
 						console.log(message); // TOO MANY CARBS
 					</code></pre>
@@ -504,10 +540,34 @@
 						const isLarge = item => item.size > 20;
 					</code></pre>
 				</section>
+				<section data-transition="">
+					<p>Arrow Functions Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					// Returning objects using ()
+					const onlySize = item => ({
+						size: item.size,
+						its_over_9000: item.size > 9000
+					});
+					</code></pre>
+				</section>
+				<section data-transition="">
+					<p>Arrow Functions Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+					// Returning objects using ()
+					const messageJsx = item => (
+						&lt;span&gt;
+							{item.size > 9000 ? 'BULGING BICEPS' : 'OK BICEPS'}
+						&lt;/span&gt;
+					);
+					</code></pre>
+					<aside class="notes">
+						Common practice in React to return objects via JSX
+					</aside>
+				</section>
 				<section data-transition="slide-in fade-out">
 					<p>Default Parameters in functions</p>
 					<pre><code class="jsx" data-trim data-noescape>
-						function buildCycle(color, wheels) {
+						function buildBicycle(color, wheels) {
 							var frameColor = color || 'silver';
 							var totalWheels = wheels || 2;
 
@@ -518,7 +578,7 @@
 				<section data-transition="fade-in slide-out">
 					<p>Default Parameters in functions</p>
 					<pre><code class="jsx" data-trim data-noescape>
-						function buildCycle(frameColor = 'silver', totalWheels = 2) {
+						function buildBicycle(frameColor = 'silver', totalWheels = 2) {
 							return new Vehicle(frameColor, totalWheels);
 						}
 					</code></pre>
@@ -585,9 +645,9 @@
 							console.log(arguments[1]); // second arg
 						}
 					</code></pre>
-					<p class="fragment">WTF JAVASCRIPT?</p>
+					<p class="fragment">WTFJS?</p>
 					<aside class="notes">
-						WTF JAVASCRIPT? SRSLY U SUK
+						It looks like an array, smells like an array, but is not an array...
 					</aside>
 				</section>
 				<section data-transition="fade-in fade-out">
@@ -610,6 +670,29 @@
 					</code></pre>
 					<p class="fragment">Ahhh, so much nicer...</p>
 				</section>
+				<section data-transition="fade-in fade-out">
+					<p>Spread Operator/Syntax</p>
+					<pre><code class="jsx" data-trim data-noescape>
+						let items = [...document.getElementsByClassName('item')];
+						items.forEach((element) => {
+							//yay it works!
+							if(!element.dataset.important) {
+								element.remove();
+							}
+						});
+						function addOneToEverything(...args) {
+							args.forEach((item) => {
+								item++;
+							});
+							return args;
+						}
+					</code></pre>
+					<p>Ahhh, so much nicer...</p>
+				</section>
+				<aside class="notes">
+				Note here that you can just put the spread operator as a parameter, and it'll do
+				exactly what was on the previous slide.
+				</aside>
 				<section data-transition="fade-in slide-out">
 					<p>Array.from()</p>
 					<pre><code class="jsx" data-trim data-noescape>
@@ -621,8 +704,7 @@
 								element.remove();
 							}
 						});
-						function addOneToEverything() {
-							let args = Array.from(arguments);
+						function addOneToEverything(...args) {
 							args.forEach((item) => {
 								item++;
 							});
@@ -775,7 +857,7 @@
 						import ReactDOM from 'react-dom';
 						import InputMaskComponent from 'react-input-mask';
 
-						let container = document.getElementById('wrap');
+						const container = document.getElementById('wrap');
 
 						ReactDOM.render(
 							&lt;InputMaskComponent
@@ -793,8 +875,8 @@
 						import ReactDOM from 'react-dom';
 						import InputMaskComponent from 'react-input-mask';
 
-						let container = document.getElementById('wrap');
-						let props = {
+						const container = document.getElementById('wrap');
+						const props = {
 							mask: '(###)-###-####',
 							onChange: (evt) => { console.log(evt.target.value); }
 						};
@@ -875,7 +957,7 @@
 								});
 								return aspects;
 							}
-						).catch( (err) => { console.log('ERROR: ' + err) });
+						).catch( (err) => { console.error('ERROR: ' + err) });
 					}
 					</code></pre>
 					<aside class="notes">
@@ -915,7 +997,7 @@
 					<pre><code class="jsx" data-trim data-noescape>
 					import {getJSON} from 'scripts/modules/utils';
 
-					getJSON('/api/data').then(
+					getJSON('/api/data?sort=asc').then(
 						(resp) => {
 							resp.forEach( (invoice) => {
 								//Do something with each invoice
@@ -926,14 +1008,19 @@
 					</code></pre>
 				</section>
 				<section data-transition="fade-in fade-out">
-					<p>Promise Basic Syntax</p>
+					<p><a
+						href="https://gist.github.com/MrBenJ/e616fd2aca423e675377f79f35192f5d"
+						rel="noopener noreferrer"
+						target="_blank">
+						Promise Basic Syntax (Click for Gist)
+					</a></p>
 					<pre><code class="jsx" data-trim data-noescape>
 					function doSomeStuff(condition) {
 						return new Promise( (resolve, reject) => {
 							if(condition) {
 								resolve('Yay! I worked!');
 							} else {
-								reject('DO YOU EVEN LIFT?');
+								reject('I did not work');
 							}
 						});
 					}
@@ -944,7 +1031,7 @@
 						},
 						(failure) => {
 							//Condition for failure
-							console.log(failure); // DO YOU EVEN LIFT?
+							console.log(failure); // I did not work
 						}
 					);
 					</code></pre>
@@ -1039,48 +1126,50 @@
 				<section data-transition="fade-in fade-out">
 					<p>Generators</p>
 					<pre><code class="jsx" data-noescape data-trim>
-					import { showModal, toCurrency, postData } from 'scripts/modules/utils';
+					import {
+						showModal, // Promise based modal prompt
+						postData } from 'scripts/modules/utils';
 
 					function* itemIterator(array) {
-					  array.forEach((item) => {
-						yield item;
-					  });
+						for(let i = 0; i < array.length; i++) {
+							yield item;
+						}
 					}
 
-					let cars = [...data]; //Assume data is a bunch of objects
+					const cars = [...data]; //Assume data is a bunch of objects
 					let itemGenerator = itemIterator(cars);
 
 					let iter = itemGenerator.next();
 					let goodCars = [];
 					let badCars = [];
+
 					// While the generator is still not done...
 					while(!iter.done) {
-					  let car = iter.value; // Get car from generated object
+						let car = iter.value; // Get car from generated object
 
-					  let body = `Car was made in ${car.year} and has generated
-						  ${toCurrency(car.revenue)}. Should this vehicle
-						  be retired?`;
-					  showModal({
-						title: 'Is this car OK?',
-						body: body
-					  }).then(
-						(decision) => {
-						  if(decision === 'yes') {
-							goodCars.push(car.id);
-						  } else {
-							badCars.push(car.id);
-						  }
-						}
-					  );
-					  iter = itemGenerator.next();
+						let body =
+							`Car was made in ${car.year} and has generated
+							${car.revenue}. Should this vehicle
+						 	be retired?`;
+						showModal({
+							title: 'Is this car OK?',
+							body: body
+						}).then(
+						(choice) => {
+							const id = car.id;
+							decision ? goodCars.push(id) : badCars.push(id);
+							badCars.push(car.id);}
+						});
+						iter = itemGenerator.next();
 					}
 					postData('/api/cars/approval', { approve: goodCars, reject: badCars});
-
 					</code></pre>
 					<aside class="notes">
 					Step through line by line. NOTE: Generators are a difficult and
 					advanced concept. It will take more than a short presentation to fully
-					understand what's happening and how this all works.
+					understand what's happening and how this all works. Generators can yield promises,
+					and what's resolved from those promises is the value that's yielded. Generators
+					can also yield generators....
 					</aside>
 				</section>
 				<section data-transition="slide-in fade-out">
@@ -1165,7 +1254,7 @@
 						<li class="fragment">Current Trend: Functional Programming - not Object Oriented!</li>
 					</ul>
 					<p class="fragment underline">"Syntactic sugar causes cancer of the semicolon."</p>
-					<p class="fragment"> - A dead guy that wrote book on computer science in 1975</p>
+					<p class="fragment"> - A dead guy that wrote a book on computer science in 1975</p>
 					<aside class="notes">
 					The guy's real name is Alan J. Perlis, and yes, he actually did write a book on CS in 1975 titled "Introduction to computer science"
 					</aside>
@@ -1241,8 +1330,7 @@
 					</div>
 				</section>
 				<section data-transition="fade-out">
-					<p>Write some code!</p>
-					<p>ES6 code</p>
+					<p>Write some code! - ES6 code</p>
 					<pre><code class="jsx" data-noescape data-trim>
 					class Person {
 						constructor(name, age) {
@@ -1269,8 +1357,7 @@
 					</code></pre>
 				</section>
 				<section data-transition="fade-in slide-out">
-					<p>Watch it transpile!</p>
-						<p>ES5 code</p>
+					<p>Watch it transpile! - ES5 code</p>
 						<pre><code class="jsx" data-noescape data-trim>
 						'use strict';
 						var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1319,8 +1406,9 @@
 						<li class="fragment">Map, Set, WeakMap, WeakSet</li>
 						<li class="fragment">Destructuring</li>
 						<li class="fragment">For...Of loops</li>
+						<li class="fragment">Object.assign()</li>
+						<li class="fragment">More Array.prototype methods!</li>
 						<li class="fragment">Math String Number Array Object API Enhancements</li>
-						<li class="fragment">Binary and Octal Literals</li>
 					</ul>
 					<p class="fragment">There's so much more!</p>
 				</section>
@@ -1331,6 +1419,12 @@
 						a thousand new features, and only a few hours of time to get through it all
 					</aside>
 				</section>
+				<!-- <section>
+					<img class="dance-baby-dance" src="img/courtingGA.jpg">
+					<aside class="notes">
+						Mention your coding lessons
+					</aside>
+				</section> -->
 				<section>
 					<p>Thank you JavascriptLA!</p>
 					<img class="smaller" src="img/ben_hike.jpg">
@@ -1348,13 +1442,16 @@
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
-
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+						hljs.configure({
+							tabReplace: '    '
+						});
+						hljs.initHighlightingOnLoad(); } }
 				]
 			});
 			document.addEventListener('keyup', function(evt) {
