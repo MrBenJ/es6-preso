@@ -1054,7 +1054,7 @@
 					<p>Template Strings</p>
 					<pre><code class="jsx" data-noescape data-trim>
 					let first_name = 'Billy';
-					let last_name = 'Mays'
+					let last_name = 'Mays';
 					let greeting = `Hello ${first_name} of the
 						${last_name} clan`;
 					/*
@@ -1082,6 +1082,25 @@
 					</aside>
 				</section>
 				<section data-transition="slide-in fade-out">
+					<p>Generators</p>
+					<pre><code class="jsx" data-noescape data-trim>
+					function* itemIterator() {
+						yield 1;
+						yield 2;
+						yield 3;
+
+					}
+
+					let itemGenerator = itemIterator();
+
+					console.log(itemGenerator.next().value)) // 1
+					console.log(itemGenerator.next().value)) // 2
+					console.log(itemGenerator.next().value)) // 3
+					// ...
+
+					</code></pre>
+				</section>
+				<section data-transition="fade-in fade-out">
 					<p>Generators</p>
 					<pre><code class="jsx" data-noescape data-trim>
 					function* itemIterator(array) {
@@ -1158,9 +1177,9 @@
 						(choice) => {
 							const id = car.id;
 							decision ? goodCars.push(id) : badCars.push(id);
-							badCars.push(car.id);}
-						});
-						iter = itemGenerator.next();
+							iter = itemGenerator.next();
+						}).catch( (error) => { throw error; });
+
 					}
 					postData('/api/cars/approval', { approve: goodCars, reject: badCars});
 					</code></pre>
@@ -1259,7 +1278,7 @@
 					The guy's real name is Alan J. Perlis, and yes, he actually did write a book on CS in 1975 titled "Introduction to computer science"
 					</aside>
 				</section>
-				<!--<section>
+				<!-- <section>
 					<p>Holy Amazeballs Ben! How do I use all these great new features!?</p>
 					<p class="fragment">Unfortunately, this is one of the most difficult parts</p>
 					<p class="fragment">This is the most important part of the entire presentation... Please pay attention!</p>
@@ -1404,11 +1423,10 @@
 						<li class="fragment">async/await</li>
 						<li class="fragment">More Array methods</li>
 						<li class="fragment">Map, Set, WeakMap, WeakSet</li>
-						<li class="fragment">Destructuring</li>
+						<li class="fragment">Reflect</li>
 						<li class="fragment">For...Of loops</li>
-						<li class="fragment">Object.assign()</li>
-						<li class="fragment">More Array.prototype methods!</li>
-						<li class="fragment">Math String Number Array Object API Enhancements</li>
+						<li class="fragment">More Object methods</li>
+						<li class="fragment">Datatype Enhancements</li>
 					</ul>
 					<p class="fragment">There's so much more!</p>
 				</section>
@@ -1419,12 +1437,6 @@
 						a thousand new features, and only a few hours of time to get through it all
 					</aside>
 				</section>
-				<!-- <section>
-					<img class="dance-baby-dance" src="img/courtingGA.jpg">
-					<aside class="notes">
-						Mention your coding lessons
-					</aside>
-				</section> -->
 				<section>
 					<p>Thank you JavascriptLA!</p>
 					<img class="smaller" src="img/ben_hike.jpg">
@@ -1433,6 +1445,11 @@
 						Private and group programming classes available. Contact for more info
 					</p>
 				</section>
+				<section>
+					<h1>Q&amp;A</h1>
+					<p>Ask me anything!</p>
+				</section>
+
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
@@ -1457,7 +1474,8 @@
 			document.addEventListener('keyup', function(evt) {
 				console.log(evt.keyCode);
 				if(evt.keyCode === 88) {
-				//	document.getElementById('video').src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?start=43&autoplay=true';
+					// Rickroll code
+					// document.getElementById('video').src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?start=43&autoplay=true';
 				}
 			});
 		</script>
