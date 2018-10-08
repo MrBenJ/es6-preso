@@ -1,6 +1,8 @@
 Practical ES6
 =============
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/MrBenJ/es6-preso.svg)](https://greenkeeper.io/)
+
 A presentation for JavascriptLA March 2017. Created by Ben Junya
 
 ## What we talk about
